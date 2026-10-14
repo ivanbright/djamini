@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ license.name }} · Djamini{% endblock %}
+
+{% block content %}
+<h1>{{ license.name }}</h1>
+
+<dl>
+  <dt>Vendor</dt><dd>{{ license.vendor|default:"-" }}</dd>
+  <dt>License key</dt><dd><code>{{ license.key }}</code></dd>
+  <dt>Owner</dt><dd>{{ license.owner.username }}</dd>
+  <dt>Added</dt><dd>{{ license.created_at|date:"Y-m-d" }}</dd>
+  <dt>Notes</dt><dd>{{ license.notes|default:"-"|linebreaksbr }}</dd>
+  <dt>Blocked groups</dt>
+  <dd>
+    {% for group in license.blocked_groups %}{{ group.name }}{% if not forloop.last %}, {% endif %}{% empty %}-{% endfor %}
+  </dd>
+</dl>
+
+{% if user == license.owner %}
+  <div class="actions">
+    <a class="button" href="{% url 'vault:license_update' license.pk %}">Edit</a>
+    <a class="button" href="{% url 'vault:license_access' license.pk %}">Manage access</a>
+    <a class="button danger" href="{% url 'vault:license_delete' license.pk %}">Delete</a>
+  </div>
+{% endif %}
+
+<p><a href="{% url 'vault:license_list' %}">← Back to licenses</a></p>
+{% endblock %}

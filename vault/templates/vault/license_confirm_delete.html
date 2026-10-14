@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete {{ license.name }} · Djamini{% endblock %}
+
+{% block content %}
+<h1>Delete “{{ license.name }}”?</h1>
+<p>Heads up, this is gone for good along with its access rules.</p>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="actions">
+    <button class="danger" type="submit">Delete</button>
+    <a class="button" href="{% url 'vault:license_detail' license.pk %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

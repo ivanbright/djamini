@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Access for {{ license.name }} · Djamini{% endblock %}
+
+{% block content %}
+<h1>Access for “{{ license.name }}”</h1>
+<p class="muted">Tick a group to block it. Everyone else keeps access.</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div class="actions">
+    <button class="primary" type="submit">Save access</button>
+    <a class="button" href="{% url 'vault:license_detail' license.pk %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

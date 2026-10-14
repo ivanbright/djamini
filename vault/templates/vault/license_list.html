@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Licenses · Djamini{% endblock %}
+
+{% block content %}
+<h1>Licenses</h1>
+<p class="muted">Only the licenses you can access show up here.</p>
+
+{% if licenses %}
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Vendor</th><th>Owner</th></tr>
+    </thead>
+    <tbody>
+      {% for license in licenses %}
+        <tr>
+          <td><a href="{% url 'vault:license_detail' license.pk %}">{{ license.name }}</a></td>
+          <td>{{ license.vendor|default:"-" }}</td>
+          <td>{{ license.owner.username }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No licenses yet. <a href="{% url 'vault:license_create' %}">Add the first one</a>.</p>
+{% endif %}
+{% endblock %}

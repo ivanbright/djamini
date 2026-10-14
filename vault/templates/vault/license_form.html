@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if object %}Edit{% else %}New{% endif %} license · Djamini{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Edit license{% else %}New license{% endif %}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div class="actions">
+    <button class="primary" type="submit">Save</button>
+    <a class="button" href="{% url 'vault:license_list' %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

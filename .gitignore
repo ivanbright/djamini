@@ -1,0 +1,17 @@
+# Virtualenv
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Local env + database
+.env
+db.sqlite3
+
+# Django
+staticfiles/
+media/
+*.log
